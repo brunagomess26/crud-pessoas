@@ -42,6 +42,18 @@ function criarCelula(linha, texto) {
   return celula;
 }
 
+// REFACTOR: função reutilizável para criação de botões
+function criarBotao(texto, classe, acao) {
+  const botao = document.createElement('button');
+
+  botao.type = 'button';
+  botao.textContent = texto;
+  botao.className = classe;
+  botao.addEventListener('click', acao);
+
+  return botao;
+}
+
 async function carregarPessoas() {
   try {
     const pessoas = await requisicao('/pessoas');
@@ -61,17 +73,11 @@ async function carregarPessoas() {
       const grupo = document.createElement('div');
       grupo.className = 'acoes-tabela';
 
-      const editar = document.createElement('button');
-      editar.textContent = 'Editar';
-      editar.className = 'secundario pequeno';
-      editar.addEventListener('click', () => {
+      const editar = criarBotao('Editar', 'secundario pequeno', () => {
         iniciarEdicao(pessoa);
       });
 
-      const excluir = document.createElement('button');
-      excluir.textContent = 'Excluir';
-      excluir.className = 'excluir pequeno';
-      excluir.addEventListener('click', () => {
+      const excluir = criarBotao('Excluir', 'excluir pequeno', () => {
         excluirPessoa(pessoa.cpf);
       });
 
