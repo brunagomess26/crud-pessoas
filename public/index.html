@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUD de Pessoas</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/script.js" defer></script>
+  </head>
+  <body>
+    <main class="container">
+      <header class="cabecalho">
+        <span class="etiqueta">Sistema de Cadastro</span>
+        <h1>Gerenciamento de Pessoas</h1>
+        <p>Cadastre, consulte, atualize e exclua pessoas.</p>
+      </header>
+
+      <section class="card">
+        <h2 id="titulo-formulario">Cadastrar pessoa</h2>
+
+        <form id="form-pessoa">
+          <div class="campos">
+            <div class="campo">
+              <label for="nome">Nome completo</label>
+              <input
+                id="nome"
+                type="text"
+                placeholder="Digite o nome"
+                required
+              />
+            </div>
+
+            <div class="campo">
+              <label for="cpf">CPF</label>
+              <input
+                id="cpf"
+                type="text"
+                inputmode="numeric"
+                maxlength="11"
+                pattern="[0-9]{11}"
+                placeholder="Somente 11 dígitos"
+                required
+              />
+            </div>
+
+            <div class="campo">
+              <label for="dataNascimento">Data de nascimento</label>
+              <input id="dataNascimento" type="date" required />
+            </div>
+          </div>
+
+          <div class="acoes">
+            <button id="btn-salvar" type="submit">Cadastrar pessoa</button>
+            <button id="btn-cancelar" type="button" class="secundario" hidden>
+              Cancelar edição
+            </button>
+          </div>
+        </form>
+
+        <p id="mensagem" class="mensagem" role="status" aria-live="polite"></p>
+      </section>
+
+      <section class="card">
+        <div class="secao-titulo">
+          <h2>Pessoas cadastradas</h2>
+          <button id="btn-atualizar" class="secundario" type="button">
+            Atualizar lista
+          </button>
+        </div>
+
+        <div class="tabela-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Nascimento</th>
+                <th>Idade</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="lista-pessoas"></tbody>
+          </table>
+        </div>
+
+        <p id="lista-vazia" class="vazio" hidden>Nenhuma pessoa cadastrada.</p>
+      </section>
+
+      <footer>CRUD de Pessoas · JavaScript · Node.js · Express</footer>
+    </main>
+  </body>
+</html>
