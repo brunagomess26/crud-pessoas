@@ -1,4 +1,3 @@
-
 import { calcularIdade } from './idade.js';
 
 export class PessoasService {
@@ -26,15 +25,10 @@ export class PessoasService {
   }
 
   listar(dataReferencia = new Date()) {
-    return Array.from(this.pessoas.values()).map(
-      (pessoa) => ({
-        ...pessoa,
-        idade: calcularIdade(
-          pessoa.dataNascimento,
-          dataReferencia
-        )
-      })
-    );
+    return Array.from(this.pessoas.values()).map((pessoa) => ({
+      ...pessoa,
+      idade: calcularIdade(pessoa.dataNascimento, dataReferencia)
+    }));
   }
 
   buscarPorCpf(cpf, dataReferencia = new Date()) {
@@ -46,10 +40,7 @@ export class PessoasService {
 
     return {
       ...pessoa,
-      idade: calcularIdade(
-        pessoa.dataNascimento,
-        dataReferencia
-      )
+      idade: calcularIdade(pessoa.dataNascimento, dataReferencia)
     };
   }
 
@@ -72,10 +63,7 @@ export class PessoasService {
 
     return {
       ...atualizada,
-      idade: calcularIdade(
-        atualizada.dataNascimento,
-        dataReferencia
-      )
+      idade: calcularIdade(atualizada.dataNascimento, dataReferencia)
     };
   }
 
@@ -84,17 +72,11 @@ export class PessoasService {
   }
 
   validarPessoa({ cpf, nome, dataNascimento }) {
-    if (
-      typeof cpf !== 'string' ||
-      !/^\d{11}$/.test(cpf)
-    ) {
+    if (typeof cpf !== 'string' || !/^\d{11}$/.test(cpf)) {
       throw new Error('CPF inválido');
     }
 
-    if (
-      typeof nome !== 'string' ||
-      !nome.trim()
-    ) {
+    if (typeof nome !== 'string' || !nome.trim()) {
       throw new Error('Nome inválido');
     }
 

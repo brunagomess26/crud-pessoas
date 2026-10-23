@@ -1,4 +1,3 @@
-
 export function calcularIdade(dataNascimento, dataReferencia = new Date()) {
   const partes = dataNascimento.split('-').map(Number);
 
@@ -24,10 +23,7 @@ export function calcularIdade(dataNascimento, dataReferencia = new Date()) {
   const mesAtual = dataReferencia.getMonth() + 1;
   const diaAtual = dataReferencia.getDate();
 
-  if (
-    mesAtual < mes ||
-    (mesAtual === mes && diaAtual < dia)
-  ) {
+  if (mesAtual < mes || (mesAtual === mes && diaAtual < dia)) {
     idade--;
   }
 

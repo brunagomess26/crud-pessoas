@@ -1,4 +1,3 @@
-
 import { criarApp } from './app.js';
 
 const app = criarApp();

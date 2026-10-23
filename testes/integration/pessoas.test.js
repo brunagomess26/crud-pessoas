@@ -1,4 +1,3 @@
-
 import { beforeEach, describe, expect, it } from 'vitest';
 import request from 'supertest';
 import { criarApp } from '../../src/app.js';
@@ -17,9 +16,7 @@ describe('API de Pessoas - Testes de Integração', () => {
   });
 
   it('POST /pessoas - deve cadastrar uma pessoa', async () => {
-    const resposta = await request(app)
-      .post('/pessoas')
-      .send(pessoa);
+    const resposta = await request(app).post('/pessoas').send(pessoa);
 
     expect(resposta.status).toBe(201);
     expect(resposta.body.nome).toBe('Maria Silva');
@@ -38,8 +35,7 @@ describe('API de Pessoas - Testes de Integração', () => {
   it('GET /pessoas/:cpf - deve buscar uma pessoa', async () => {
     await request(app).post('/pessoas').send(pessoa);
 
-    const resposta = await request(app)
-      .get(`/pessoas/${pessoa.cpf}`);
+    const resposta = await request(app).get(`/pessoas/${pessoa.cpf}`);
 
     expect(resposta.status).toBe(200);
     expect(resposta.body.cpf).toBe(pessoa.cpf);
@@ -59,13 +55,11 @@ describe('API de Pessoas - Testes de Integração', () => {
   it('DELETE /pessoas/:cpf - deve excluir uma pessoa', async () => {
     await request(app).post('/pessoas').send(pessoa);
 
-    const resposta = await request(app)
-      .delete(`/pessoas/${pessoa.cpf}`);
+    const resposta = await request(app).delete(`/pessoas/${pessoa.cpf}`);
 
     expect(resposta.status).toBe(204);
 
-    const consulta = await request(app)
-      .get(`/pessoas/${pessoa.cpf}`);
+    const consulta = await request(app).get(`/pessoas/${pessoa.cpf}`);
 
     expect(consulta.status).toBe(404);
   });
@@ -73,21 +67,17 @@ describe('API de Pessoas - Testes de Integração', () => {
   it('deve rejeitar CPF duplicado', async () => {
     await request(app).post('/pessoas').send(pessoa);
 
-    const resposta = await request(app)
-      .post('/pessoas')
-      .send(pessoa);
+    const resposta = await request(app).post('/pessoas').send(pessoa);
 
     expect(resposta.status).toBe(409);
   });
 
   it('deve rejeitar dados inválidos', async () => {
-    const resposta = await request(app)
-      .post('/pessoas')
-      .send({
-        cpf: '123',
-        nome: '',
-        dataNascimento: '2030-01-01'
-      });
+    const resposta = await request(app).post('/pessoas').send({
+      cpf: '123',
+      nome: '',
+      dataNascimento: '2030-01-01'
+    });
 
     expect(resposta.status).toBe(400);
   });

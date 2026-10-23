@@ -1,4 +1,3 @@
-
 import express from 'express';
 import { PessoasService } from './pessoas.service.js';
 
@@ -32,10 +31,7 @@ export function criarApp() {
 
   app.put('/pessoas/:cpf', (req, res) => {
     try {
-      const pessoa = service.atualizar(
-        req.params.cpf,
-        req.body
-      );
+      const pessoa = service.atualizar(req.params.cpf, req.body);
       return res.status(200).json(pessoa);
     } catch (erro) {
       return responderErro(res, erro);
