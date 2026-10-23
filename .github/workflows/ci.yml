@@ -1,0 +1,55 @@
+name: CI - CRUD de Pessoas
+
+on:
+  push:
+    branches: [main, feature/crud-pessoas]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  qualidade:
+    name: Analise, Formatacao e Testes
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Analise estatica - ESLint
+        run: npm run lint
+
+      - name: Verificar formatacao - Prettier
+        run: npm run format:check
+
+      - name: Executar testes unitarios
+        run: npm run test:unit
+
+      - name: Executar testes de integracao
+        run: npm run test:integration
+
+  docker:
+    name: Criar imagem Docker
+    runs-on: ubuntu-latest
+    needs: qualidade
+
+    steps:
+      - name: Baixar codigo
+        uses: actions/checkout@v4
+
+      - name: Construir imagem Docker
+        run: docker build -t crud-pessoas:1.0 .
+
+      - name: Listar imagem criada
+        run: docker images crud-pessoas

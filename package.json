@@ -8,7 +8,10 @@
     "test:watch": "vitest",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "start": "node src/server.js",
+    "test:unit": "vitest run testes/unit",
+    "test:integration": "vitest run testes/integration"
   },
   "keywords": [],
   "author": "",
